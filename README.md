@@ -2,8 +2,10 @@ Parsed Attributes
 =================
 
 This grew out of a need to give structure to the data in HTTP requests and
-responses. Parsing it was easy enough, but I found myself duplicating a bunch of
-code. This was how I fixed that problem.
+responses. Parsing it was easy enough (Ruby has great gems), but I found myself duplicating a bunch of
+code to manage the raw and parsed data, exceptions and whatnot.
+
+This was how I fixed that problem.
 
 TL;DR
 -----
@@ -36,7 +38,7 @@ class SomeExampleClass
 end
 ```
 
-This is the hand coded equivalent:
+This is a naive hand coded equivalent:
 
 ```ruby
 class SomeExampleClass
@@ -57,3 +59,12 @@ class SomeExampleClass
   end
 end
 ```
+
+Extending
+---------
+
+Most of the boilerplate code is abstracted away into a helper module,
+creatively named 'base'.
+
+Extending is really simple, take a look at the JSON parser wrapper for
+a minimal example.
