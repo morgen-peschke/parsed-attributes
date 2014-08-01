@@ -14,7 +14,7 @@ because it's short to write, and was the first supported data type.
 
 TL;DR
 -----
-
+	
 Raw data in, parsed data out.
 
 Install
@@ -76,7 +76,7 @@ Customizing Behavior
 The attribute defining methods accept some arguments that modify the
 way exceptions and un-parseable data are handled.
 
-# Default Behavior
+### Default Behavior
 
 ```ruby
 json_attribute :data
@@ -86,7 +86,7 @@ Exceptions during parsing are supressed.
 
 If #raw_data returns un-parseable data, then #parsed_data returns nil.
 
-# Raise once
+### Raise once
 
 ```ruby
 json_attribute :data, raises_once: true
@@ -101,7 +101,7 @@ parser exceptions once per data to avoid cluttering up the screen/logs.
 
 This overrides the 'raise always' behavior.
 
-# Raise always
+### Raise always
 
 ```ruby
 json_attribute :data, raises: true
