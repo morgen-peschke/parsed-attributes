@@ -7,8 +7,8 @@ class JsonTest < MiniTest::Test
     extend Parsed::Json
 
     json_attribute :json
-    json_attribute :raises_once,   raise:        true
-    json_attribute :raises_always, raise_always: true
+    json_attribute :raises_once,   raise_once:   true
+    json_attribute :raises_always, raise:        true
   end
 
   def setup

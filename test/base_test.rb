@@ -25,8 +25,8 @@ class BaseTest < MiniTest::Test
     extend Parsed::TestParser
     stupid_attribute :name
     broken_attribute :raises_never
-    broken_attribute :raises_once,   raise:        true
-    broken_attribute :raises_always, raise_always: true
+    broken_attribute :raises_once,   raise_once:   true
+    broken_attribute :raises_always, raise:        true
   end
 
   def setup
