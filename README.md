@@ -14,7 +14,7 @@ because it's short to write, and was the first supported data type.
 
 TL;DR
 -----
-	
+
 Raw data in, parsed data out.
 
 Install
@@ -117,3 +117,14 @@ creatively named 'base'.
 
 Extending is really simple, take a look at the JSON parser wrapper for
 a minimal example.
+
+Roadmap
+-------
+
+- [x] JSON
+- [ ] HTTP Headers
+  - [ ] Generic
+  - [ ] BasicAuth
+  - [ ] Cookies
+  - [ ] Multiple header blocks
+- [ ] URI
