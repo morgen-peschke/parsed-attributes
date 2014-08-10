@@ -8,7 +8,7 @@ class CookieTest < MiniTest::Test
     cookie = Cookie.parse 'name=value; Expires=Fri, 01 Aug 2014 12:10:14 GMT; max-age=-1; domain=test.example.com; path=/to_h; secure; httpOnly'
     assert_equal 'name',                          cookie.name
     assert_equal 'value',                         cookie.value
-    assert_equal 'Fri, 01 Aug 2014 12:10:14 GMT', cookie.expires
+    assert_equal nil,                             cookie.expires
     assert_equal  Time.at(0),                     cookie.max_age
     assert_equal 'test.example.com',              cookie.domain
     assert_equal '/to_h',                         cookie.path
@@ -55,7 +55,7 @@ class CookieTest < MiniTest::Test
 
   def test_cookie_to_string
     cookie   = Cookie.parse 'name=value; Expires=Fri, 01 Aug 2014 12:10:14 GMT; max-age=-1; domain=test.example.com; path=/to_h; secure; httpOnly'
-    expected = 'name=value; Expires=Fri, 01 Aug 2014 12:10:14 GMT; Max-Age=0; Domain=test.example.com; Path=/to_h; Secure; HttpOnly'
+    expected = 'name=value; Max-Age=0; Domain=test.example.com; Path=/to_h; Secure; HttpOnly'
     assert_equal expected, cookie.to_s
 
     cookie   = Cookie.parse 'name=value; MAX-AGE=-1; domain = test.example.com; path=/to_h; secure; httpOnly'
@@ -78,7 +78,6 @@ class CookieTest < MiniTest::Test
     expected = {
       name:     'name',
       value:    'value',
-      expires:  'Fri, 01 Aug 2014 12:10:14 GMT',
       max_age:   Time.at(0),
       domain:   'test.example.com',
       path:     '/to_h',
@@ -114,7 +113,6 @@ class CookieTest < MiniTest::Test
     expected = {
       name:     'name',
       value:    'value',
-      expires:  'Fri, 01 Aug 2014 12:10:14 GMT',
       max_age:   Time.at(0),
       domain:   'test.example.com',
       path:     '/to_h',

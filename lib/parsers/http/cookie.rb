@@ -21,7 +21,7 @@ class Cookie
 
   def to_s
     cookie = ["#{@name}=#{@value}"]
-    cookie << "Expires=#{@expires}" if defined? @expires
+    cookie << "Expires=#{@expires}" if defined?(@expires) and !defined?(@max_age)
     cookie << "Max-Age=#{@max_age == Time.at(0) ? 0 : self.age_left }" if defined? @max_age
     cookie << "Domain=#{@domain}"   if defined? @domain
     cookie << "Path=#{@path}"       if defined? @path
@@ -32,7 +32,7 @@ class Cookie
 
   def to_h
     h = { name: @name, value: @value }
-    h[:expires]   = @expires   if defined? @expires
+    h[:expires]   = @expires   if defined?(@expires) and !defined?(@max_age)
     h[:max_age]   = @max_age   if defined? @max_age
     h[:domain]    = @domain    if defined? @domain
     h[:path]      = @path      if defined? @path
@@ -55,7 +55,7 @@ class Cookie
 
     def to_h
       h = { name: @name, value: @value }
-      h[:expires]   = @expires   if defined? @expires
+      h[:expires]   = @expires   if defined?(@expires) and !defined?(@max_age)
       h[:max_age]   = @max_age   if defined? @max_age
       h[:domain]    = @domain    if defined? @domain
       h[:path]      = @path      if defined? @path
