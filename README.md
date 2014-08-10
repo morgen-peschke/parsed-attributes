@@ -37,7 +37,7 @@ Basic Usage
 require 'parsed-attributes'
 
 class SomeExampleClass
-  extend Parsed::Json
+  extend Parsed::JSON
 
   json_attribute :data
 end
