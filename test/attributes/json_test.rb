@@ -4,7 +4,7 @@ require_relative '../../lib/parsed/json'
 class JsonTest < MiniTest::Test
 
   class Wrapper
-    extend Parsed::Json
+    extend Parsed::JSON
     json_attribute :name
     json_attribute :raises_never
     json_attribute :raises_once,   raise_once:   true
