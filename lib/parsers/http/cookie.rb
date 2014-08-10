@@ -48,12 +48,6 @@ class Cookie
   class Parser
     attr_reader :name, :value, :expires, :max_age, :domain, :path, :secure, :http_only
 
-    def self.empty?(val)
-      return true if val.nil?
-      return true if val.respond_to?(:size) && val.size == 0
-      return false
-    end
-
     def initialize(options = {})
       @time         = options[:time]
       @default_path = options[:default_path] || ''
@@ -93,12 +87,12 @@ class Cookie
     end
 
     def name_and_value!(chunk)
-      raise ParserError.new "Name cannot be blank"             if Parser.empty? chunk
+      raise ParserError.new "Name cannot be blank"             if chunk.nil? or chunk.empty?
       raise ParserError.new "Name/value pair must include '='" if chunk.size == 1
       @name  = chunk[0]
       @value = chunk[1]
 
-      raise ParserError.new "Name cannot be blank" if Parser.empty? @name
+      raise ParserError.new "Name cannot be blank" if @name.empty?
     end
 
     def attribute!(chunk)
@@ -115,12 +109,12 @@ class Cookie
     end
 
     def expires!(val)
-      raise ParserError.new 'Expires cannot have a blank value' if Parser.empty?(val)
+      raise ParserError.new 'Expires cannot have a blank value' if val.empty?
       @expires = val
     end
 
     def max_age!(val)
-      raise ParserError.new 'Max-Age cannot have a blank value' if Parser.empty?(val)
+      raise ParserError.new 'Max-Age cannot have a blank value' if val.empty?
 
       unless val =~ /^-?\d+$/
         raise ParserError.new "Expected integer for Max-Age instead of #{val}"
@@ -135,12 +129,12 @@ class Cookie
     end
 
     def domain!(val)
-      raise ParserError.new 'Domain cannot have a blank value' if Parser.empty?(val)
+      raise ParserError.new 'Domain cannot have a blank value' if val.empty?
       @domain = (val[0] == '.' ? val[1..-1] : val).downcase
     end
 
     def path!(val)
-      if Parser.empty?(val) || val[0] != '/'
+      if val.empty? || val[0] != '/'
         @path = @default_path
       else
         @path = val
