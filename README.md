@@ -125,6 +125,6 @@ Roadmap
 - [ ] HTTP Headers
   - [ ] Generic
   - [ ] BasicAuth
-  - [ ] Cookies
+  - [x] Cookies
   - [ ] Multiple header blocks
 - [ ] URI
