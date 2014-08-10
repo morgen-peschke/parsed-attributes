@@ -15,9 +15,10 @@ module Parsed
     #                   - @parsed_yaml
     def __define_parsed_attributes_raw_methods(name)
       attr_reader "raw_#{name}"
-      
+
       define_method "raw_#{name}=" do |raw|
         self.instance_variable_set("@raw_#{name}", raw)
+
         if self.instance_variable_defined?("@parsed_#{name}")
           self.remove_instance_variable("@parsed_#{name}")
         end
@@ -38,10 +39,11 @@ module Parsed
     #                  And assumes the instance variables:
     #                   - @raw_yaml
     #                   - @parsed_yaml
+    #
     #  options (acts like Hash):: Modifies the exception handling behavior
     #                  raises_once (boolean):: Setting to true will raise on the first error.
     #
-    #                                          This is mostly so that if you are catching and 
+    #                                          This is mostly so that if you are catching and
     #                                          printing error messages they won't flood the
     #                                          terminal.
     #
@@ -53,6 +55,8 @@ module Parsed
     # the parsed data.
     def __define_parsed_attributes_parsed_methods(name, options={}, &parse_block)
       parsed_varname = "@parsed_#{name}"
+      raise_once   = options.delete :raise_once
+      raise_always = options.delete :raise
 
       define_method "parsed_#{name}" do
         if self.instance_variable_defined? parsed_varname
@@ -62,15 +66,13 @@ module Parsed
         unless parse_block.nil?
           begin
             parsed = parse_block.call self.instance_variable_get("@raw_#{name}")
-            self.instance_variable_set(parsed_varname, parsed)          
+            self.instance_variable_set(parsed_varname, parsed)
           rescue StandardError => e
-            if options[:raise_once] == true
-              self.instance_variable_set(parsed_varname, nil)
-            end
-            raise e if options[:raise] == true || options[:raise_once] == true
+            self.instance_variable_set(parsed_varname, nil) if raise_once == true
+            raise e if raise_always == true || raise_once == true
           end
         end
-        
+
         return self.instance_variable_get(parsed_varname)
       end
     end
