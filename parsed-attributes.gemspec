@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'parsed-attributes'
-  s.version     = '0.1.0'
+  s.version     = '0.1.1'
   s.date        = '2014-07-31'
   s.summary     = 'Generates paired attributes that parse their contents.'
   s.description = <<-EOF
@@ -11,7 +11,10 @@ Gem::Specification.new do |s|
 EOF
   s.authors     = ['Morgen Peschke']
   s.email       = 'morgen.peschke@gmail.com'
-  s.files       = Dir['lib/parsed/*.rb']
+  s.files       = Dir['lib/parsed/*.rb',
+                      'lib/parsed/http/*.rb',
+                      'lib/parsers/http/*.rb'
+  ]
   s.homepage    = 'https://github.com/morgen-peschke/parsed-attributes'
   s.license     =  'MIT'
 end
