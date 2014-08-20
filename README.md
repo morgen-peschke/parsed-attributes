@@ -124,7 +124,7 @@ Roadmap
 - [x] JSON
 - [ ] HTTP Headers
   - [ ] Generic
-  - [ ] BasicAuth
+  - [x] BasicAuth
   - [x] Cookies
   - [ ] Multiple header blocks
 - [ ] URI
