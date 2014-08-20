@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'parsed-attributes'
-  s.version     = '0.1.1'
+  s.version     = '0.1.2'
   s.date        = '2014-07-31'
   s.summary     = 'Generates paired attributes that parse their contents.'
   s.description = <<-EOF
