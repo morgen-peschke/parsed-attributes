@@ -19,6 +19,17 @@ class Cookie
     return (@max_age - Time.now).to_i
   end
 
+  def ==(other)
+    (other.respond_to?(:name)      && self.name == other.name &&
+     other.respond_to?(:value)     && self.name == other.name &&
+     other.respond_to?(:expires)   && self.name == other.name &&
+     other.respond_to?(:max_age)   && self.name == other.name &&
+     other.respond_to?(:path)      && self.name == other.name &&
+     other.respond_to?(:domain)    && self.name == other.name &&
+     other.respond_to?(:secure)    && self.name == other.name &&
+     other.respond_to?(:http_only) && self.name == other.name )
+  end
+
   def to_s
     cookie = ["#{@name}=#{@value}"]
     cookie << "Expires=#{@expires}" if defined?(@expires) and !defined?(@max_age)
