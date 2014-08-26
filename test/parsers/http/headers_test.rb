@@ -94,5 +94,15 @@ EOF
 
     parsed = Parsers::HTTP::Headers.parse 'date: not a real date', best_effort: true
     assert_equal 'not a real date', parsed.date
+
+    e = assert_raises(Parsers::HTTP::Headers::ParserError) do
+      Parsers::HTTP::Headers.parse 'bad header string'
+    end
+    assert_equal 'Malformed header (bad header string)', e.message
+
+    e = assert_raises(Parsers::HTTP::Headers::ParserError) do
+      Parsers::HTTP::Headers.parse 'bad header string', best_effort: true
+    end
+    assert_equal 'Malformed header (bad header string)', e.message
   end
 end

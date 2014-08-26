@@ -7,6 +7,7 @@ class HTTPHeadersTest < MiniTest::Test
     http_headers_attribute :headers
     http_headers_attribute :raises_never
     http_headers_attribute :raises_once,   raise_once:   true
+    http_headers_attribute :best_effort,   raise_once:   true, best_effort: true
     http_headers_attribute :raises_always, raise:        true
   end
 
@@ -15,6 +16,7 @@ class HTTPHeadersTest < MiniTest::Test
     @test_obj = Wrapper.new
     @raw = 'Server: Fake server'
     @broken = 'Date: not a date'
+    @best_effort = Parsers::HTTP::Headers.parse @broken, best_effort: true
     @parsed = Parsers::HTTP::Headers.parse @raw
   end
 
@@ -36,6 +38,7 @@ class HTTPHeadersTest < MiniTest::Test
     @test_obj.raw_raises_never  = @broken
     @test_obj.raw_raises_once   = @broken
     @test_obj.raw_raises_always = @broken
+    @test_obj.raw_best_effort   = @broken
 
     assert_equal nil, @test_obj.parsed_raises_never, 'Failure should set parsed to nil'
 
@@ -50,6 +53,8 @@ class HTTPHeadersTest < MiniTest::Test
     assert_raises(Parsers::HTTP::Headers::ParserError, 'Should have raised the second time') do
       @test_obj.parsed_raises_always
     end
+
+    assert_equal @best_effort, @test_obj.parsed_best_effort, 'Should have tried harder'
   end
 
 end
