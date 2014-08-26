@@ -1,5 +1,5 @@
-require 'minitest/autorun'
-require_relative '../../../lib/parsed/http/cookie'
+require_relative '../../test_helper'
+require 'parsed/http/cookie'
 
 class HTTPCookieTest < MiniTest::Test
   class Wrapper

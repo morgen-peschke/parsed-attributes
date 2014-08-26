@@ -1,5 +1,5 @@
-require 'minitest/autorun'
-require_relative '../../lib/parsed/base'
+require_relative '../test_helper'
+require 'parsed/base'
 
 # A parser that doesn't parse for testing
 module Parsed

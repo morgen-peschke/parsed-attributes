@@ -1,5 +1,5 @@
-require 'minitest/autorun'
-require_relative '../../lib/parsed/json'
+require_relative '../test_helper'
+require 'parsed/json'
 
 class JsonTest < MiniTest::Test
 

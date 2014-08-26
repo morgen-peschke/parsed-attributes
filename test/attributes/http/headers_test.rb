@@ -1,5 +1,5 @@
-require 'minitest/autorun'
-require_relative '../../../lib/parsed/http/headers'
+require_relative '../../test_helper'
+require 'parsed/http/headers'
 
 class HTTPHeadersTest < MiniTest::Test
   class Wrapper

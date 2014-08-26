@@ -1,6 +1,5 @@
-require 'minitest/autorun'
-require 'date'
-require_relative '../../../lib/parsers/http/headers'
+require_relative '../../test_helper'
+require 'parsers/http/headers'
 
 class HeadersTest < MiniTest::Test
 

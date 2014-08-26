@@ -1,6 +1,6 @@
-require          'minitest/autorun'
-require          'timecop'
-require_relative '../../../lib/parsers/http/cookie'
+require_relative '../../test_helper'
+require 'timecop'
+require 'parsers/http/cookie'
 
 class CookieTest < MiniTest::Test
 

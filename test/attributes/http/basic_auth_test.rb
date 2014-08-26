@@ -1,5 +1,5 @@
-require 'minitest/autorun'
-require_relative '../../../lib/parsed/http/basic_auth'
+require_relative '../../test_helper'
+require 'parsed/http/basic_auth'
 
 class HTTPBasicAuthTest < MiniTest::Test
   class Wrapper
