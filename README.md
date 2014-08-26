@@ -122,9 +122,9 @@ Roadmap
 -------
 
 - [x] JSON
-- [ ] HTTP Headers
-  - [ ] Generic
+- [ ] HTTP Request/Response
+  - [x] Generic Headers
   - [x] BasicAuth
   - [x] Cookies
-  - [ ] Multiple header blocks
+  - [ ] Multiple header blocks in Response
 - [ ] URI
