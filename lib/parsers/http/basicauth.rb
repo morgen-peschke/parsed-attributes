@@ -16,6 +16,11 @@ class BasicAuth
     [self.userpwd].pack('m').strip
   end
 
+  def ==(other)
+    (other.respond_to?(:username) && self.username == other.username &&
+     other.respond_to?(:password) && self.password == other.password )
+  end
+
   def self.parse(raw_value)
     decoded = raw_value.unpack("m").first
     si = decoded.index ':'

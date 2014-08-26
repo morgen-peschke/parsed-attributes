@@ -20,14 +20,14 @@ class Cookie
   end
 
   def ==(other)
-    (other.respond_to?(:name)      && self.name == other.name &&
-     other.respond_to?(:value)     && self.name == other.name &&
-     other.respond_to?(:expires)   && self.name == other.name &&
-     other.respond_to?(:max_age)   && self.name == other.name &&
-     other.respond_to?(:path)      && self.name == other.name &&
-     other.respond_to?(:domain)    && self.name == other.name &&
-     other.respond_to?(:secure)    && self.name == other.name &&
-     other.respond_to?(:http_only) && self.name == other.name )
+    ( other.respond_to?(:name)      && self.name      == other.name     &&
+      other.respond_to?(:value)     && self.value     == other.value    &&
+      other.respond_to?(:expires)   && self.expires   == other.expires  &&
+      other.respond_to?(:max_age)   && self.max_age   == other.max_age  &&
+      other.respond_to?(:path)      && self.path      == other.path     &&
+      other.respond_to?(:domain)    && self.domain    == other.domain   &&
+      other.respond_to?(:secure)    && self.secure    == other.secure   &&
+      other.respond_to?(:http_only) && self.http_only == other.http_only )
   end
 
   def to_s
