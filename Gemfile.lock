@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     minitest (5.4.0)
+    rake (10.1.0)
     timecop (0.7.1)
 
 PLATFORMS
@@ -9,4 +10,5 @@ PLATFORMS
 
 DEPENDENCIES
   minitest (~> 5.4)
+  rake
   timecop (~> 0.7)
