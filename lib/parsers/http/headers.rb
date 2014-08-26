@@ -16,6 +16,12 @@ module Parsers
         end
       end
 
+      def ==(other)
+        return false unless other.respond_to?('[]')
+        @fields.each {|k,v| return false unless other[k] == v}
+        return true
+      end
+
       def normalize_key(key)
         key.to_s.downcase
       end
@@ -92,7 +98,7 @@ module Parsers
                 )
               end
             rescue StandardError => e
-              raise e unless @best_effort
+              raise ParserError.new ("error encountered in #{name} (#{e.message})") unless @best_effort
               headers[name] = value
             end
           end

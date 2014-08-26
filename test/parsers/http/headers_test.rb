@@ -87,10 +87,10 @@ EOF
   end
 
   def test_exceptions
-    e = assert_raises(ArgumentError) do
+    e = assert_raises(Parsers::HTTP::Headers::ParserError) do
       Parsers::HTTP::Headers.parse 'date: not a real date'
     end
-    assert_equal 'invalid date', e.message
+    assert_equal 'error encountered in date (invalid date)', e.message
 
     parsed = Parsers::HTTP::Headers.parse 'date: not a real date', best_effort: true
     assert_equal 'not a real date', parsed.date
