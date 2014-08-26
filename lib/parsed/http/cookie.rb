@@ -11,7 +11,7 @@ module Parsed
       # Accepts default options, see Parsed::Base
       def http_cookie_attribute(name, options = {})
         __define_parsed_attributes_all_methods name, options do |raw_value|
-          ::Cookie.parse raw_value
+          ::Parsers::HTTP::Cookie.parse raw_value
         end
       end
     end

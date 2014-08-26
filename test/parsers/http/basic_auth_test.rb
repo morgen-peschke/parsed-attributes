@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../../lib/parsers/http/basicauth'
+require_relative '../../../lib/parsers/http/basic_auth'
 
 class BasicAuthTest < MiniTest::Test
 
@@ -18,7 +18,7 @@ class BasicAuthTest < MiniTest::Test
 
   def test_basics
     @famous_passwords.each do |(username, password)|
-      ba = BasicAuth.new username, password
+      ba = Parsers::HTTP::BasicAuth.new username, password
       assert_equal username,                   ba.username
       assert_equal password,                   ba.password
       assert_equal "#{username}:#{password}",  ba.userpwd
@@ -27,7 +27,7 @@ class BasicAuthTest < MiniTest::Test
 
   def test_to_s
     @famous_passwords.each do |(username, password, base64)|
-      ba = BasicAuth.new username, password
+      ba = Parsers::HTTP::BasicAuth.new username, password
       assert_equal base64, ba.to_s
       assert_equal base64, "#{ba}"
     end
@@ -35,7 +35,7 @@ class BasicAuthTest < MiniTest::Test
 
   def test_parse
     @famous_passwords.each do |(username, password, base64)|
-      ba = BasicAuth.parse base64
+      ba = Parsers::HTTP::BasicAuth.parse base64
       assert_equal username, ba.username
       assert_equal password, ba.password
     end
@@ -43,17 +43,22 @@ class BasicAuthTest < MiniTest::Test
 
   def test_round_trip
     @famous_passwords.each do |(username, password)|
-      encoded = BasicAuth.new(username, password).to_s
-      ba = BasicAuth.parse encoded
+      encoded = Parsers::HTTP::BasicAuth.new(username, password).to_s
+      ba = Parsers::HTTP::BasicAuth.parse encoded
       assert_equal username, ba.username
       assert_equal password, ba.password
     end
   end
 
   def test_exceptions
-    e = assert_raises(BasicAuth::ParserError, 'Malformed string, expecting ":"') {BasicAuth.parse ["no colon"].pack('m')}
+    e = assert_raises(Parsers::HTTP::BasicAuth::ParserError, 'Malformed string, expecting ":"') do
+      Parsers::HTTP::BasicAuth.parse ["no colon"].pack('m')
+    end
     assert_equal 'Malformed string, expecting ":"', e.message
-    e = assert_raises(BasicAuth::ParserError, 'Username cannot be blank')        {BasicAuth.parse [":pass"].pack('m')}
+
+    e = assert_raises(Parsers::HTTP::BasicAuth::ParserError, 'Username cannot be blank') do
+      Parsers::HTTP::BasicAuth.parse [":pass"].pack('m')
+    end
     assert_equal 'Username cannot be blank', e.message
   end
 
