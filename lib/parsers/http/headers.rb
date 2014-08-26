@@ -53,8 +53,8 @@ module Parsers
         super
       end
 
-      def self.parse(raw_string)
-        self.new Parser.new(raw_string).parse!
+      def self.parse(raw_string, options = {})
+        self.new Parser.new(raw_string, options).parse!
       end
 
       class Parser

@@ -78,4 +78,21 @@ EOF
     assert_equal auth,                parsed['authorization']
   end
 
+  def test_retry_after
+    parsed = Parsers::HTTP::Headers.parse 'retry-after: 10'
+    assert_equal 10, parsed['retry-after']
+
+    parsed = Parsers::HTTP::Headers.parse 'retry-after: Fri, 06 Jun 2014 04:32:50 GMT'
+    assert_equal DateTime.httpdate('Fri, 06 Jun 2014 04:32:50 GMT'), parsed['retry-after']
+  end
+
+  def test_exceptions
+    e = assert_raises(ArgumentError) do
+      Parsers::HTTP::Headers.parse 'date: not a real date'
+    end
+    assert_equal 'invalid date', e.message
+
+    parsed = Parsers::HTTP::Headers.parse 'date: not a real date', best_effort: true
+    assert_equal 'not a real date', parsed.date
+  end
 end
